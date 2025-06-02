@@ -30,7 +30,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'us-east-1'
+          aws-region: 'us-east-2'
 
       - name: Install dependencies
         run: npm ci
@@ -58,7 +58,7 @@ jobs:
           
           for i in $(seq 1 $RETRY_COUNT); do
             aws lambda update-function-code \
-              --function-name arn:aws:lambda:us-east-1:537757446889:function:techlab-lambda \
+              --function-name arn:aws:lambda:us-east-2:537757446889:function:techlab-kenyi \
               --zip-file fileb://deploy.zip && break
             if [ "$i" -eq "$RETRY_COUNT" ]; then
               echo "Max retries reached. Exiting."
@@ -75,7 +75,7 @@ jobs:
           
           for i in $(seq 1 $RETRY_COUNT); do
             aws lambda update-function-configuration \
-              --function-name arn:aws:lambda:us-east-1:537757446889:function:techlab-lambda \
+              --function-name arn:aws:lambda:us-east-2:537757446889:function:techlab-kenyi \
               --handler dist/main.handler && break
             if [ "$i" -eq "$RETRY_COUNT" ]; then
               echo "Max retries reached. Exiting."
